@@ -51,6 +51,6 @@ By default, all outputs are written in a **/out** folder, which the user must lo
 
 
 
-....Umarel gives a fresh view on old problems! 
+....Umarel gives an experienced look to new UHECR problems! 
  
 <img src="cover.png" alt="alt text" width="600" height="580">
