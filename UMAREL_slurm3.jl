@@ -18,7 +18,7 @@
 
 #...just two parameters to give here 
 @everywhere tag = "test"    #....will be attached to all output file names to differentiate them if necessary 
-@everywhere np = 60000   #...total number of UHECR       #...reference: np=12000
+@everywhere np = 60000   #...total number of UHECR     
 #..PATH TO FOLDERS OF ROUTINES AND FILES
 #@everywhere      main="/leonardo_scratch/fast/IscrC_UMAREL/Julia/UMAREL_P/"  #..main folder containing UMAREL functions
 @everywhere main = "/Users/francovazza/Library/CloudStorage/Dropbox/Julia_prog/UHECRpropa/UMAREL/UMAREL_P/PUBLIC/"
