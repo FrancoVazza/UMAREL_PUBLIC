@@ -357,9 +357,9 @@ end
 end
 
 
-function load_losses(filename="/Users/francovazza/Dropbox/Julia_prog/UHECRpropa/UMAREL/UMAREL_P/SimProp_losses_proton_new.txt")
+function load_losses(file_losses)  
 
-    data = readdlm(filename)
+    data = readdlm(file_losses)
 
     E_losses = data[:, 1]
     beta_pair = data[:, 3]
@@ -582,9 +582,9 @@ end
 
 
     filep1 = string(root_out, "path_", E_initial[1], "Z", Z, "_spec_redshift_cosmo", cosmo, "_", tag, ".hdf5")
-    #...we delete the file hdf5 if existing already
-    command = `rm -r -f `
-    run(`$command $filep1 `)
+    #...calling unix command to delete the file hdf5 if existing already - only supporte in UNIX 
+    #    command = `rm -r -f `
+    #run(`$command $filep1 `)
     h5write(filep1, "injections", inj)
     h5write(filep1, "snapshot", t)  #...timestep of the simulation
     h5write(filep1, "path step", it_path)   #..step in the path file (which uses a reduced number of steps to spare memory)

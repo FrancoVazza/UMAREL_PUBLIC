@@ -1,9 +1,9 @@
-#using Distributed, SlurmClusterManager
-#addprocs(SlurmManager())
-#@everywhere println("hello from $(myid()):$(gethostname())")
+#usage:
+#>using Distributed
+#>addprocs(N)
+#>include("UMAREL.jl")
 
-#.......START OF UMAREL 
-
+#.......NECESSARY PACKAGES 
 @everywhere using LaTeXStrings
 @everywhere using Plots
 @everywhere Plots.PyPlotBackend()
@@ -17,21 +17,21 @@
 @everywhere using Interpolations
 
 #...just two parameters to give here 
-@everywhere tag = "test_public"    #....will be attached to all output file names to differentiate them if necessary 
+@everywhere tag = "test"    #....will be attached to all output file names to differentiate them if necessary 
 @everywhere np = 12000   #...total number of UHECR     
 #..PATH TO FOLDERS OF ROUTINES AND FILES
-#@everywhere      main="/leonardo_scratch/fast/IscrC_UMAREL/Julia/UMAREL_P/"  #..main folder containing UMAREL functions
-@everywhere main =pwd()
-#main = "/Users/francovazza/Library/CloudStorage/Dropbox/Julia_prog/UHECRpropa/UMAREL/UMAREL_P/PUBLIC/"
-@everywhere include(string(main, "/constants.jl"))
+#..main folder containing UMAREL functions
+@everywhere main = "/Users/francovazza/Library/CloudStorage/Dropbox/Julia_prog/UHECRpropa/UMAREL/UMAREL_P/UMAREL_PUBLIC/"
+@everywhere include(string(main, "constants.jl"))
 @everywhere include(string(main, "parameters_UMAREL.jl"))
-@everywhere include(string(main, "functions_UMAREL.jl"))   #...external module with all relevant functions used for the transport of CRs    
-#@everywhere      energy,dEdt,interp_losses=lossesC(Z,main)   #....loading the appropriate tabulated loss function 
-@everywhere interp_losses, Emin, Emax = load_losses()
+@everywhere include(string(main, "functions_UMAREL.jl")) 
+@everywhere file_losses=string(main,"losses_proton_new.txt")
+  #...external module with all relevant functions used for the transport of CRs    
+@everywhere interp_losses, Emin, Emax = load_losses(file_losses)
 @everywhere times, zed, dt, max_it = define_times(courant, scale, zfin, zin, ch, cOmegaM)   #...computes the maximum iterations and the array of redshift to cover the entire evolution
 
 
-@everywhere ngen = 5   #....ref: ngen=25
+@everywhere ngen = 10   #....number of generations 
 @everywhere inj_times = Array{Float64}(undef, ngen)
 for i in 1:ngen
   inj_times[i] = convert(Int64, (i - 1) * trunc(max_it / ngen) + 1)
