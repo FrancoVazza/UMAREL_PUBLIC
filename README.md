@@ -45,7 +45,7 @@ The public version of UMAREL shared here is meant to work on a laptop, using mul
 -  sample catalog of [halos](https://owncloud.ia2.inaf.it/index.php/s/7S9QsvSgyq45OXh)
 -  sample ENZO 3D [dataset](https://owncloud.ia2.inaf.it/index.php/s/vrJD56wR8L6CtiY) 
 
-The main parameter file is **parameters_UMAREL.jl**, where the possible choices are explained in detail, while in the main **UMAREL_slurm.jl** file the user can easily change the injected number of particles.  
+The main parameter file is **parameters_UMAREL.jl**, where the possible choices are explained in detail, while in the main **UMAREL.jl** file the user can quickly change the injected number of particles, the number of different injecton epochs, and the outputs tag name.  
 
 By default, all outputs are written in a **/out** folder, which the user must locally create. 
 
@@ -53,6 +53,14 @@ Notice that the parallelisation strategy for UMAREL is optimised for large (>=10
 For small box simulations (<512^3 cells) it is more convenient to read the entire grid just once for every epcoh.
 
 A production UMAREL run processing 1e5 protons on a dozen snapshots of a 1024^3 simulation typically takes ~8 hours on 12 cores on a MacBook Pro. 
+
+To execute UMAREL after launching Julia:
+  > using Distributed
+
+  > addprocs(N_of_processors)
+  
+  > include("./UMAREL.jl")
+   
 
 ....Umarel gives an experienced look to new UHECR problems! 
  
