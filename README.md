@@ -4,34 +4,56 @@
  
 <img src="umarel_logo.png" alt="alt text">  
  
- Parallel code in Jula language to simulate the propagation of UHECRs in cosmological simulations, developed by F.Vazza, A.Firinu (University of Bologna) and C. Evoli (GSSI). 
+ Parallel code in [Julia 1.10](https://julialang.org/) language to simulate the propagation of UHECRs in cosmological simulations, developed by F.Vazza, A.Firinu (University of Bologna) and C. Evoli (GSSI). 
 
 
-UMAREL (Ultra-high-energy cosmic rays in Magnetic fields Affected by Rigidity diffusion and Energy Losses) injects large sets
+UMAREL (*U*ltra-high-energy cosmic rays in *M*agnetic fields *A*ffected by *R*igidity diffusion and *E*nergy *L*osses) injects large sets
 of cosmic rays into a simulated volume and self-consistently evolve their spatial trajectories and energies in time. See Firinu, Vazza & Evoli 2026 (submitted) for details.
 
-Key features
+## Key features
 
 * particle propagator: Borish busher;
-* loss terms: continuous loss terms from tabulated tables including interaction with the EBL and the CMB;
+* loss terms: continuous loss terms from tabulated tables including interaction with the Extragalactic Background Light (EBL) and the Cosmic Microwave Background (CMB);
 * sources selected from a galaxy catalog;
-* cosmological effects;
-* particles are evolved while the background simulation also is evolved, by combining differnt timesteps;
-* multiple generation epochs of particles are allowed;
+* cosmological effects (adiabatic losses on UHECRs and redsfhiting of the EBL and CMB);
+* particles are evolved while the background simulation can also be evolved, by combining differnt timesteps as the propagation unfolds;
+* multiple generation epochs of particles are possible;
 * the codes is parallelised using Julia and has been tested up to 128 processors. 
 
-This is the simulated propagation of 1e5 UHECR protons from z=1 to z=0.
-
-
-<img src="map_t.png" alt="" width="600" height="600">
-
-
+## Examples of results
 This is a movie showing multiple injections of UHECRs, where each color represents a different generation of particles
-
  
 <img src="movie.gif" alt="" width="600" height="600">
 
+This is the simulated propagation of 100,000 UHECR protons injected at z=1 and evolved until z=0 with a realistic magnetic field in a 1024^3 cells ENZO simulation.
 
-Umarel gives a fresh view on old problems! 
+<img src="map_t.png" alt="" width="600" height="600">
+
+This is the evolution of the energy of each simulated UHECR proton, as a function of time. Multiple spikes mark the epochs of generation of new families of UHECR protons.
+
+<img src="out_Energy_time.png" alt="" width="600" height="600">
+
+
+This is one of the statistics which can be produced with UMAREL: the average distance covered by UHECR protons since their injection, with (solid lines) or without (dashed) the effects of extragalactic magnetic fields.
+
+ 
+<img src="fidvsnolosses.png" alt="" width="600" height="600">
+
+
+## What is the public version of UMAREL
+The public version of UMAREL shared here is meant to work on a laptop, using multiple cores specified by the usuer, using a sequence of 3D snapshots of cosmological simulations and halo catalogs avaiable to the user. As an example, we consider the propagation within a set of HDF5 cubic fils covering an [ENZO](enzo-project.org) cosmological simulation. The user can download one sample 3D volume and its halo catalog here:
+-  sample catalog of [halos](https://owncloud.ia2.inaf.it/index.php/s/7S9QsvSgyq45OXh)
+-  sample ENZO 3D [dataset](https://owncloud.ia2.inaf.it/index.php/s/vrJD56wR8L6CtiY) 
+
+The main parameter file is **parameters_UMAREL.jl**, where the possible choices are explained in detail, while in the main **UMAREL_slurm.jl** file the user can easily change the injected number of particles.  
+
+By default, all outputs are written in a **/out** folder, which the user must locally create. 
+
+Notice that the parallelisation strategy for UMAREL is optimised for large (>=1024^3 cells) simulations, since processors access the B-field values only where particles are at a given snapshot and greatly this reduces the memory workload.
+For small box simulations (<512^3 cells) it is more convenient to read the entire grid just once for every epcoh.
+
+A production UMAREL run processing 1e5 protons on a dozen snapshots of a 1024^3 simulation typically takes ~8 hours on 12 cores on a MacBook Pro. 
+
+....Umarel gives an experienced look to new UHECR problems! 
  
 <img src="cover.png" alt="alt text" width="600" height="580">
