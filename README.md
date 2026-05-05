@@ -8,7 +8,7 @@
 
 
 UMAREL (*U*ltra-high-energy cosmic rays in *M*agnetic fields *A*ffected by *R*igidity diffusion and *E*nergy *L*osses) injects large sets
-of cosmic rays into a simulated volume and self-consistently evolve their spatial trajectories and energies in time. See Firinu, Vazza & Evoli 2026 (submitted) for details.
+of cosmic rays into a simulated volume and self-consistently evolve their spatial trajectories and energies in time. See [Firinu, Vazza & Evoli 2026](https://arxiv.org/abs/2605.02324) (submitted) for details.
 
 ## Key features
 
