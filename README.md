@@ -42,8 +42,10 @@ This is one of the statistics which can be produced with UMAREL: the average dis
 
 ## What is the public version of UMAREL
 The public version of UMAREL shared here is meant to work on a laptop, using multiple cores specified by the usuer, using a sequence of 3D snapshots of cosmological simulations and halo catalogs avaiable to the user. As an example, we consider the propagation within a set of HDF5 cubic fils covering an [ENZO](enzo-project.org) cosmological simulation. The user can download one sample 3D volume and its halo catalog here:
--  sample catalog of [halos](https://owncloud.ia2.inaf.it/index.php/s/7S9QsvSgyq45OXh)
--  sample ENZO 3D [dataset](https://owncloud.ia2.inaf.it/index.php/s/vrJD56wR8L6CtiY) 
+-  sample catalog of [halos](https://owncloud.ia2.inaf.it/index.php/s/7S9QsvSgyq45OXh)  
+-  sample ENZO 3D [HDF5 dataset](https://owncloud.ia2.inaf.it/index.php/s/F5bFCRkDIe6llcX) 
+
+While for production the codes needs a proper sequence of simulated snapshots and their corresponding halo catalogs sorted in time/redshift, this dataset can be used for testing by pretending that the same datasets represent multiple different redshifts. 
 
 The main parameter file is **parameters_UMAREL.jl**, where the possible choices are explained in detail, while in the main **UMAREL.jl** file the user can quickly change the injected number of particles, the number of different injecton epochs, and the outputs tag name.  
 
